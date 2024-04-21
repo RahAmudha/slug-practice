@@ -25,7 +25,7 @@ for example in dataset["train"]:
     tokens = []
     for column_name in column_names:
         tokens.extend(tokenizer.encode(example[column_name]))
-    t
+    
     total_tokens += len(tokens)
     total_examples += 1
 
