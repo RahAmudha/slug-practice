@@ -8,9 +8,11 @@ import tiktoken
 
 
 # Load the data sets. I used this example from hugging face
+# if you find a better dataset/cheaper change this string
 dataset = load_dataset("MicPie/unpredictable_studystack-com")
 
 # only the columns that we care about
+# maybe not task?
 column_names = ["task", "input", "output"]
 
 # Load the tokenizer for our model
@@ -33,3 +35,7 @@ for example in dataset["train"]:
 print(f"Total tokens: {total_tokens}")
 print(f"Total examples: {total_examples}")
 print(f"Average tokens per example: {total_tokens / total_examples:.2f}")
+
+# Cost per 1M tokens via OpenAI
+total_cost = (total_tokens/1E6) * 6.00
+print(f"Total Cost of Fine-Tuning Job: {total_cost}")
