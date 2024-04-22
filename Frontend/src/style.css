@@ -52,3 +52,24 @@ body {
 .prompt-example::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
+
+#card-container {
+    padding: 1%;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1em;
+}
+
+.card {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.35), rgba(151, 151, 151, 0.45));
+    font-size: 32px;
+
+    border-radius: 20px;
+    
+    height: 200px;
+    
+    padding: 20px;
+
+    color: rgba(255, 255, 255, 0.85);
+}
