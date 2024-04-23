@@ -1,0 +1,13 @@
+{
+    "dependencies":[
+
+        {
+            "module" : "datasets",
+            "version" : "2.19.0"
+        },
+        {
+            "module" : "tiktoken",
+            "version" : "0.6.0"
+        }
+    ]
+}
