@@ -6,13 +6,13 @@ def process_request_simple(data):
 
     response_data = sent_to_openai(data)
     
-    
+    ## figure out what data we need from user
     response = {
         'status': 'success',
         'data': response_data
     }
     
-    return response
+    return response_data
 
 def process_request_mc(data):
     prompt = data['prompt']
