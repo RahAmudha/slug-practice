@@ -9,7 +9,7 @@ import os
 def sent_to_openai(data):
     topic = data['topic']
     example = data['example']
-    difficulty = data['difficulty']
+    #difficulty = data['difficulty']
     
     prompt = "Give me 5 questions and answers for this topic: %s. Like this: %s  in json format" % (topic,example)
     APIKEY = os.environ.get("OPENAI_SLUG_PRACTICE_API_KEY")
