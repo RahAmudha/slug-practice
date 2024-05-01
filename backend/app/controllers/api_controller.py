@@ -1,12 +1,13 @@
 
-from app.services.service import sent_to_openai
+from app.services.service import*
 
 
+#TODO Find a way to return success status alongside JSON data
 def process_request_simple(data):
 
-    response_data = sent_to_openai(data)
+    response_data = service_simple(data)
     
-    ## figure out what data we need from user
+    ##!Figure this out
     response = {
         'status': 'success',
         'data': response_data
@@ -15,33 +16,29 @@ def process_request_simple(data):
     return response_data
 
 def process_request_mc(data):
-    prompt = data['prompt']
     
+    response_data = service_mc(data)
     
-    response_data = sent_to_openai(prompt)
-    
-    
+    ##!Figure this out
     response = {
         'status': 'success',
         'data': response_data
     }
     
-    return response
+    return response_data
 
 
 def process_request_tf(data):
-    prompt = data['prompt']
     
+    response_data = service_tf(data)
     
-    response_data = sent_to_openai(prompt)
-    
-    
+    ##!Figure this out
     response = {
         'status': 'success',
         'data': response_data
     }
     
-    return response
+    return response_data
 
 
 

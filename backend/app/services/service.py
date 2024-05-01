@@ -6,26 +6,19 @@ from openai import OpenAI
 import os
 
 
-def sent_to_openai(data):
-    topic = data['topic']
-    example = data['example']
-    #difficulty = data['difficulty']
-    
-    prompt = "Give me 5 questions and answers for this topic: %s. Like this: %s  in json format" % (topic,example)
-    APIKEY = os.environ.get("OPENAI_SLUG_PRACTICE_API_KEY")
-    
-    client = OpenAI(
-    api_key= APIKEY
-    )
+def make_openai_request(prompt):
 
+    APIKEY = os.environ.get("OPENAI_SLUG_PRACTICE_API_KEY")    
+    client = OpenAI(api_key= APIKEY)
+    
     print(prompt)
-
+    
     response = client.chat.completions.create(
         model = "gpt-3.5-turbo",
         response_format =  {"type": "json_object"},
         
         messages = [
-                {"role": "system", "content": "You are tutor"},
+                {"role": "system", "content": "You are tutor"}, # Tweak this?
                 {"role": "user", "content": prompt }
                 ],
 
@@ -36,27 +29,39 @@ def sent_to_openai(data):
 
     return response.choices[0].message.content
 
-"""
-tested via postman
-def send_to_openai(request):
-    try:
-        APIKEY = os.environ.get("OPENAI_SLUG_PRACTICE_API_KEY")
-        url = 'https://api.openai.com/v1/chat/completions'
-        headers = {
-            'Authorization': f'Bearer {APIKEY}',
-            'Content-Type': 'application/json',
-        }
-        print(APIKEY)
-        response = requests.post(url, json=request.json, headers=headers)
-        response.raise_for_status()
 
-        response_json = response.json()
+# Service the Simple Request
+def service_simple(data):
+    topic = data['topic']
+    example = data['example']
+    
+    #! prompt engineered goes here
+    prompt = "Give me 5 questions and answers for this topic: %s. Like this: %s in json format" % (topic, example)
+    
+    response = make_openai_request(prompt)
+    return response
 
-        
-        message = response_json['choices'][0]['message']['content']
-        print('Message',message)
-        return jsonify(response.json())
-    except requests.exceptions.RequestException as e:
-        return jsonify({'error': str(e)}), 500
+# Service the True/False Request
+def service_tf(data):
+    topic = data['topic']
+    example = data['example']
+    
+    #! prompt engineered goes here
+    prompt = "Give me 5 True False for this topic: %s. Like this: %s in json format" % (topic, example)
+    
+    response = make_openai_request(prompt)
+    return response
+    
 
-"""
+
+
+# Service the MC request
+def service_mc(data):
+    topic = data['topic']
+    example = data['example']
+    
+    #! prompt engineered goes here
+    prompt = "Give me 5 Multiple Choice for this topic: %s. Like this: %s in json format" % (topic, example)
+    
+    response = make_openai_request(prompt)
+    return response
