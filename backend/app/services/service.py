@@ -40,7 +40,7 @@ def service_simple(data):
     prompt = """
 You are a bot that generates practice problems based on an academic keyword, difficulty, and the example that the user gives.
 The difficulty can be a number between 1 and 10, with 1 being the easiest and 10 being the hardest.
-Generate 10 problems and answers about %s at difficulty level %d and based on this example: %s. In JSON format.
+Generate 10 problems and answers about %s at difficulty level %s and based on this example: %s. In JSON format.
     """
     generated_prompt = prompt % (topic, difficulty, example)
 
@@ -58,7 +58,7 @@ def service_tf(data):
     prompt = """
 You are a bot that generates practice problems based on an academic keyword, difficulty, and the example that the user gives.
 The difficulty can be a number between 1 and 10, with 1 being the easiest and 10 being the hardest.
-Generate 10  true and false problems with answers about %s at difficulty level %d and based on this example: %s. In JSON format.
+Generate 10  true and false problems with answers about %s at difficulty level %s and based on this example: %s. In JSON format.
     """
     generated_prompt = prompt % (topic, difficulty, example)
     response = make_openai_request(generated_prompt)
@@ -77,7 +77,7 @@ def service_mc(data):
     prompt = """
 You are a bot that generates practice problems based on an academic keyword, difficulty, and the example that the user gives.
 The difficulty can be a number between 1 and 10, with 1 being the easiest and 10 being the hardest.
-Generate 10  multiple choice questions and answers with answers about %s at difficulty level %d and based on this example: %s. In JSON format.
+Generate 10  multiple choice questions and answers with answers about %s at difficulty level %s and based on this example: %s. In JSON format.
     """
     generated_prompt = prompt % (topic, difficulty, example)
     response = make_openai_request(generated_prompt)
