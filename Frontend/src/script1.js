@@ -35,7 +35,7 @@ $(document).ready(function() {
         };
 
         $.ajax({
-            url: 'http://127.0.0.1:5000/api/sample', 
+            url: 'http://127.0.0.1:5000/api/openai/simple', 
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
