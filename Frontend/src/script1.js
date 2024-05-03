@@ -85,7 +85,7 @@ $(document).ready(function() {
     });
 
     $('#next').click(function() {
-        if (currentCardIndex < flipCards.length - 1) {
+        if (currentCardIndex < cardsData.length - 1) {
             currentCardIndex++;
             alert(currentCardIndex);
             displayCard(currentCardIndex);
