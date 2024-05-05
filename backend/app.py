@@ -1,7 +1,6 @@
-from flask import Flask, request, jsonify,Blueprint
+from flask import Flask, request, jsonify,Blueprint, render_template
 from app.controllers.api_controller import*
 from flask_cors import CORS
-
 
 app = Flask(__name__)
 CORS(app)
@@ -116,7 +115,9 @@ def openai_route_mc():
     data = request.json
     return process_request_mc(data)
 
-
+@app.route('/') 
+def index():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run()
