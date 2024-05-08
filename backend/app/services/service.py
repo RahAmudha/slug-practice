@@ -6,20 +6,25 @@ from openai import OpenAI
 import os
 
 
-def make_openai_request(prompt):
+def make_openai_request(user_prompt):
 
     APIKEY = os.environ.get("OPENAI_SLUG_PRACTICE_API_KEY")    
     client = OpenAI(api_key= APIKEY)
     
-    print(prompt)
+    print(user_prompt)
+    
+    system_prompt = """You are a bot that generates practice questions and answers based on an academic keyword, difficulty, and the example that the user gives.
+    The difficulty can be a number between 1 and 10, with 1 being the easiest and 10 being the hardest. Respond in a JSON format with So, the overall structure is a 
+    dictionary that contains a key "questions" whose value is an array.
+    The array, in turn, contains a dictionary with keys "question" and "answer" and their respective string values."""
     
     response = client.chat.completions.create(
         model = "gpt-3.5-turbo",
         response_format =  {"type": "json_object"},
         
         messages = [
-                {"role": "system", "content": "You are a machine that creates practice problems and answers for students. "}, # Tweak this?
-                {"role": "user", "content": prompt }
+                {"role": "system", "content":system_prompt}, 
+                {"role": "user", "content": user_prompt }
                 ],
 
             
@@ -38,9 +43,8 @@ def service_simple(data):
     
     #! prompt engineered goes here
     prompt = """
-You are a bot that generates practice problems based on an academic keyword, difficulty, and the example that the user gives.
-The difficulty can be a number between 1 and 10, with 1 being the easiest and 10 being the hardest.
-Generate 10 problems and answers about %s at difficulty level %s and based on this example: %s. In JSON format.
+Generate 10 problems and answers about %s at difficulty level %s and based on this example: %s. With questions being the name of the array and 'question'
+and 'answers' being the keys
     """
     generated_prompt = prompt % (topic, difficulty, example)
 
@@ -75,9 +79,11 @@ def service_mc(data):
     
     #! prompt engineered goes here
     prompt = """
-You are a bot that generates practice problems based on an academic keyword, difficulty, and the example that the user gives.
-The difficulty can be a number between 1 and 10, with 1 being the easiest and 10 being the hardest.
-Generate 10  multiple choice questions and answers with answers about %s at difficulty level %s and based on this example: %s. In JSON format.
+Generate 10 Multiple Choice questions and answers with options about %s at difficulty level %s and based on this example: %s. 
+With 'questions' being the name of the array, 
+'question' being a key for every question,
+3 choices labeled A B or C with 'choice' being an key value pair where the value is an array with the choices
+and 'answers' being the key for right option
     """
     generated_prompt = prompt % (topic, difficulty, example)
     response = make_openai_request(generated_prompt)
