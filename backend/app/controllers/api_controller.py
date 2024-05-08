@@ -19,4 +19,4 @@ def process_request(payload_data):
     ##TODO Response Validation Goes here
     
 
-    return response    
+    return jsonify(response)
