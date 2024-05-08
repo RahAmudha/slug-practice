@@ -22,8 +22,9 @@ $(document).ready(function() {
         const subject = $('#subject').val().trim();
         const prompt = $('#prompt').val().trim();
         const difficulty = $('#difficulty').val().trim();
+        const format = $('#format').val().trim();
 
-        if (!subject || !prompt || !difficulty) {
+        if (!subject || !prompt || !difficulty || !format) {
             alert('Please enter all the fields - subject, example and difficulty.');
             return;
         }
@@ -31,11 +32,12 @@ $(document).ready(function() {
         const data = {
             "topic": subject,
             "example": prompt,
-            "difficulty": difficulty
+            "difficulty": difficulty,
+            "format": format
         };
 
         $.ajax({
-            url: 'http://127.0.0.1:5000/api/openai/simple', 
+            url: 'http://127.0.0.1:5000/openai/generate', 
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
@@ -54,8 +56,9 @@ $(document).ready(function() {
         const subject = $('#subject').val().trim();
         const prompt = $('#prompt').val().trim();
         const difficulty = $('#difficulty').val().trim();
+        const format = $('#format').val().trim();
 
-        if (!subject || !prompt || !difficulty) {
+        if (!subject || !prompt || !difficulty || !format) {
             alert('Please enter all the fields - subject, example and difficulty.');
             return;
         }
