@@ -63,7 +63,7 @@ $(document).ready(function() {
             return;
         }
 
-            // Replace this with the actual API call
+        // Replace this with the actual API call
         cardsData = [
             {
             "question": "What is a semaphore in computer science?",
@@ -76,7 +76,7 @@ $(document).ready(function() {
         ];
 
         displayCard(currentCardIndex);
-
+        hidePrompts();
     });
 
     $('#prev').click(function() {
@@ -97,24 +97,34 @@ $(document).ready(function() {
 
     function displayCard(index) {
         const card = cardsData[index];
-
+        // TODO: fix buttons not working
         console.log(card.question + '\n' + card.answer);
         const flipCardHtml = `
-          <div class="flip-card">
+        <button id="prev"><</button>
+        <div class="flip-card">
             <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <h2>Question:</h2>
-                <p>${card.question}</p>
-              </div>
-              <div class="flip-card-back">
-                <h2>Answer:</h2>
-                <p>${card.answer}</p>
-              </div>
+                <div class="flip-card-front">
+                    <h2>QUESTION</h2>
+                    <p>${card.question}</p>
+                </div>
+                <div class="flip-card-back">
+                    <h2>ANSWER</h2>
+                    <p>${card.answer}</p>
+                </div>
             </div>
-          </div>
+        </div>
+        <button id="next">></button>
         `;
     
         $('#flip-cards-container').html(flipCardHtml).show();
     }
 
+    function hidePrompts() {
+        $('#subject').hide();
+        $('#prompt').hide();
+        $('#difficulty').hide();
+        $('#format').hide();
+        $('#generate').hide();
+        $('#generate1').hide();
+    }
 });
