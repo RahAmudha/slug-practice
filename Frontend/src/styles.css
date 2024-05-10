@@ -13,7 +13,7 @@ h2, p {
     max-width: 600px;
     margin: auto;
     text-align: center;
-    padding-top: 10rem;
+    padding-top: 5rem;
 }
 
 .input-group input {
@@ -23,11 +23,25 @@ h2, p {
     border: 1px solid #5e5b85;
     border-radius: 25px;
     background-color: #28256d;
+
+    color: rgb(196, 196, 196);
+    font: 1em Arial;
 }
 
 .input-group button {
     padding: 10px 20px;
     cursor: pointer;
+}
+
+#generate-container {
+    padding-top: 1rem;
+}
+
+#generate, #generate1 {
+    background-color: #3f3472;
+    border: 1px solid #444261;
+    border-radius: 25px;
+    color: #fff;
 }
 
 #flip-cards-container {
