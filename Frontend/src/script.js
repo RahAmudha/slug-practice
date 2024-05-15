@@ -1,65 +1,138 @@
-// Scripts for index.html
+$(document).ready(function() {
+    let currentCardIndex = 0;
+    let flipCards = [];
 
-// Get the submit button element
-const submitButton = document.querySelector('.submit-btn');
+    function createFlipCard(question, answer) {
+        return `
+            <div class="flip-card">
+                <div class="flip-card-front">${question}</div>
+                <div class="flip-card-back">${answer}</div>
+            </div>
+        `;
+    }
 
-// Add a click event listener to the submit button
-submitButton.addEventListener('click', async() => {
-    // Get the values from the textareas
-    const subject_input = document.querySelector('.prompt-subject').value;
-    const example_input = document.querySelector('.prompt-example').value;
+    function displayFlipCards() {
+        $('#flip-cards-container').empty();
+        if (flipCards.length > 0) {
+            $('#flip-cards-container').append(flipCards[currentCardIndex]);
+        }
+    }
 
-    try {
-        //send a POST request to the Flask API
-        const response = await fetch('http://127.0.0.1:5000/api/openai/simple', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            topic: subject_input,
-            example: example_input,
-          }),
+    $('#generate').click(function() {
+        const subject = $('#subject').val().trim();
+        const prompt = $('#prompt').val().trim();
+        const difficulty = $('#difficulty').val().trim();
+        const format = $('#format').val().trim();
+
+        if (!subject || !prompt || !difficulty || !format) {
+            alert('Please enter all the fields - subject, example and difficulty.');
+            return;
+        }
+
+        const data = {
+            "topic": subject,
+            "example": prompt,
+            "difficulty": difficulty,
+            "format": format
+        };
+
+        $.ajax({
+            url: 'http://127.0.0.1:5000/openai/generate', 
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function(response) {
+                flipCards = response.map(item => createFlipCard(item.question, item.answer));
+                currentCardIndex = 0;
+                displayFlipCards();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
         });
+    });
+
+    $('#generate1').click(function() {
+        const subject = $('#subject').val().trim();
+        const prompt = $('#prompt').val().trim();
+        const difficulty = $('#difficulty').val().trim();
+        const format = $('#format').val().trim();
+
+        if (!subject || !prompt || !difficulty || !format) {
+            alert('Please enter all the fields - subject, example and difficulty.');
+            return;
+        }
+
+        // Replace this with the actual API call
+        cardsData = [
+            {
+            "question": "What is a semaphore in computer science?",
+            "answer": "A semaphore is a synchronization primitive that controls access to a shared resource by multiple processes or threads."
+            },
+            {
+            "question": "What is the difference between process and thread?",
+            "answer": "A process is an independent program execution unit, while a thread is a subset of a process that can be scheduled independently for execution."
+            }
+        ];
+
+        displayCard(currentCardIndex);
+        displayButtons();
+        hidePrompts();
+    });
+
+    function displayButtons() {
+        // TODO: fix buttons not working
+        const navButtons = `
+        <button id="prev"><</button>
+        <button id="next">></button>
+        `;
     
-        // Parse the response as JSON
-        const data = await response.json();
-    
-        // Process the response data
-        console.log('API Response:', data);
-        // You can update the UI or perform any other actions with the response data
-    
-      } catch (error) {
-        console.error('Error:', error);
-        // Handle any errors that occurred during the fetch request
-      }
+        $('#buttons').html(navButtons).show();
+    }
 
-    // Print the values to the console
-    console.log('Prompt 1:', subject_input);
-    console.log('Prompt 2:', example_input);
-});
-
-
-// Scripts for practice.html
-
-// Set to cardSlider for easy reference
-const cardSlider = document.querySelector('#card-slider');
-
-// Get value of slider
-cardSlider.addEventListener('input', () => {
-    // Parse the slider's integer value
-    const cardCount = parseInt(cardSlider.value);
-
-    // Set to cardDivs for easy reference
-    const cardDivs = document.querySelectorAll('.card');
-
-    // Iterate through cards and show/hide number of cards based on slider value
-    cardDivs.forEach((card, index) => {
-        if (index < cardCount) {
-            card.style.display = 'grid';
-        } 
-        else {
-            card.style.display = 'none';
+    $('#prev').click(function() {
+        if (currentCardIndex > 0) {
+            currentCardIndex--;
+            alert(currentCardIndex);
+            displayCard(currentCardIndex);
         }
     });
+
+    $('#next').click(function() {
+        if (currentCardIndex < cardsData.length - 1) {
+            currentCardIndex++;
+            alert(currentCardIndex);
+            displayCard(currentCardIndex);
+        }
+    });
+
+    function displayCard(index) {
+        const card = cardsData[index];
+        console.log(card.question + '\n' + card.answer);
+        const flipCardHtml = `
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2>QUESTION</h2>
+                    <p>${card.question}</p>
+                </div>
+                <div class="flip-card-back">
+                    <h2>ANSWER</h2>
+                    <p>${card.answer}</p>
+                </div>
+            </div>
+        </div>
+        `;
+    
+        $('#flip-cards-container').html(flipCardHtml).show();
+    }
+
+    function hidePrompts() {
+        $('#subject').hide();
+        $('#prompt').hide();
+        $('#difficulty').hide();
+        $('#format').hide();
+        $('#generate').hide();
+        $('#generate1').hide();
+    }
 });

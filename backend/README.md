@@ -24,6 +24,7 @@ Backend README ( subject to change NOT FINAL)
 
 2. Open the `.env` file and add the following environment variables:
    OPENAI_SLUG_PRACTICE_API_KEY=your-openai-api-key
+   // REMEMBER TO EXPORT
 Replace `your-openai-api-key` with your actual OpenAI API key.
 
 ## Running the Server

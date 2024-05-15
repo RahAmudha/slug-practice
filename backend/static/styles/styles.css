@@ -1,8 +1,12 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #1c200a;
     margin: 0;
-    padding: 20px;
+    padding: 20px
+}
+
+h2, p {
+    color: #fff;
 }
 
 .container {
@@ -13,8 +17,10 @@ body {
 
 .input-group input {
     margin: 10px 0;
-    padding: 10px;
+    padding: 20px;
     width: calc(50% - 22px);
+    border: 1px solid #ccc;
+    border-radius: 25px;
 }
 
 .input-group button {
@@ -25,21 +31,26 @@ body {
 #flip-cards-container {
     perspective: 1000px;
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
 
 .flip-card {
-    background-color: #fff;
-    width: 300px;
-    height: 200px;
+    background-color: #726e34;
+    /* width: 50em; */
+    height: 25em; 
     border: 1px solid #ccc;
-    margin: auto;
+    /* margin: auto; */
     transform-style: preserve-3d;
     transition: transform 0.5s;
+    border-radius: 10px;
 }
 
 .flip-card-inner {
     position: relative;
-    width: 100%;
+    width: 640px;
     height: 100%;
     text-align: center;
     transition: transform 0.6s;
@@ -57,9 +68,9 @@ body {
     height: 100%;
     backface-visibility: hidden;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
     box-sizing: border-box;
 }
 

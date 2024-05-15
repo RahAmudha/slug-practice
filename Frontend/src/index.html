@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Flip Card Generator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="preprompt-div">
-        <textarea class="prompt-subject" placeholder="Enter your subject to continue" style="width: 100%;"></textarea>
+    <div class="container">
+        <!-- <h1>Slug Practice</h1> -->
+        <img src="../imgs/slug-practice-favicon-black.png" alt="Slug Practice Logo">
+        <div class="input-group">
+            <input type="text" id="subject" placeholder="Enter Subject">
+            <input type="text" id="prompt" placeholder="Enter an Example">
+            <input type="text" id="difficulty" placeholder="Enter Difficulty 1-10"><br>
+            <input type="text" id="format" placeholder="Enter the format"><br>
+            <div id="generate-container">
+                <!-- <button id="generate">Generate</button> -->
+                <button id="generate1">Generate w/ Dummy Data</button>
+            </div>
+        </div>
+        <div id="flip-cards-container"></div>
+        <div id="buttons"></div>
     </div>
-
-    <div id="preprompt-div">
-        <textarea class="prompt-example" placeholder="Give me an example question" style="width: 100%; text-align: left;"></textarea>
-    </div>
-
-    <button type="submit" class="submit-btn">Submit</button>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
