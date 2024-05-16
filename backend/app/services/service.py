@@ -19,7 +19,7 @@ def make_openai_request(user_prompt):
     The array, in turn, contains a dictionary with keys "question" and "answer" and their respective string values."""
     
     response = client.chat.completions.create(
-        model = "gpt-3.5-turbo",
+        model = "gpt-4o",
         response_format =  {"type": "json_object"},
         
         messages = [
