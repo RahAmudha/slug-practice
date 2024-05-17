@@ -5,7 +5,6 @@ $(document).ready(function() {
     function createFlipCard(question, answer) {
         console.log(question + '\n' + answer);
         const flipCardHtml = `
-        <button id="prev"><</button>
         <div class="flip-card">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
@@ -18,10 +17,17 @@ $(document).ready(function() {
                 </div>
             </div>
         </div>
-        <button id="next">></button>
         `;
+
+        const buttonsHtml = `
+            <button id="prev"><</button>
+            <button id="next">></button>
+        `;
+
     
         $('#flip-cards-container').html(flipCardHtml).show();
+        $('#buttons').html(buttonsHtml).show();
+
         // return `
         //     <div class="flip-card">
         //         <div class="flip-card-front">${question}</div>
@@ -62,8 +68,20 @@ $(document).ready(function() {
             data: JSON.stringify(data),
             success: function(response) {
                 console.log(response);
+                
+                response.questions.forEach((item, index) => {
+                    // console.log(`Question ${index + 1}: ${item.question}`);
+                    // console.log(`Answer: ${item.answer}`);
+                    // console.log(''); // Add an empty line for better readability
+                    flipCards.push({
+                        "question": item.question,
+                        "answer": item.answer
+                    })
+                });
 
-                createFlipCard("test", "test answer");
+                console.log(flipCards);
+
+                createFlipCard(flipCards[0].question, flipCards[0].answer);
                 hidePrompts();
                 // displayCard(currentCardIndex);
 
@@ -115,7 +133,7 @@ $(document).ready(function() {
     });
 
     $('#next').click(function() {
-        if (currentCardIndex < cardsData.length - 1) {
+        if (currentCardIndex < flipCards.length - 1) {
             currentCardIndex++;
             alert(currentCardIndex);
             displayCard(currentCardIndex);
@@ -123,11 +141,10 @@ $(document).ready(function() {
     });
 
     function displayCard(index) {
-        const card = cardsData[index];
+        const card = flipCards[index];
         // TODO: fix buttons not working
         console.log(card.question + '\n' + card.answer);
         const flipCardHtml = `
-        <button id="prev"><</button>
         <div class="flip-card">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
@@ -140,10 +157,14 @@ $(document).ready(function() {
                 </div>
             </div>
         </div>
-        <button id="next">></button>
+        `;
+        const buttonsHtml = `
+            <button id="prev"><</button>
+            <button id="next">></button>
         `;
     
         $('#flip-cards-container').html(flipCardHtml).show();
+        $('#buttons').html(buttonsHtml).show();
     }
 
     function hidePrompts() {
