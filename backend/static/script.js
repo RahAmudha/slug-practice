@@ -3,12 +3,37 @@ $(document).ready(function() {
     let flipCards = [];
 
     function createFlipCard(question, answer) {
-        return `
-            <div class="flip-card">
-                <div class="flip-card-front">${question}</div>
-                <div class="flip-card-back">${answer}</div>
+        console.log(question + '\n' + answer);
+        const flipCardHtml = `
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2>QUESTION</h2>
+                    <p>${question}</p>
+                </div>
+                <div class="flip-card-back">
+                    <h2>ANSWER</h2>
+                    <p>${answer}</p>
+                </div>
             </div>
+        </div>
         `;
+
+        const buttonsHtml = `
+            <button id="prev"><</button>
+            <button id="next">></button>
+        `;
+
+    
+        $('#flip-cards-container').html(flipCardHtml).show();
+        $('#buttons').html(buttonsHtml).show();
+
+        // return `
+        //     <div class="flip-card">
+        //         <div class="flip-card-front">${question}</div>
+        //         <div class="flip-card-back">${answer}</div>
+        //     </div>
+        // `;
     }
 
     function displayFlipCards() {
@@ -35,21 +60,41 @@ $(document).ready(function() {
             "difficulty": difficulty,
             "format": format
         };
-
+        
         $.ajax({
             url: 'http://127.0.0.1:5000/openai/generate', 
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function(response) {
-                flipCards = response.map(item => createFlipCard(item.question, item.answer));
-                currentCardIndex = 0;
-                displayFlipCards();
+                console.log(response);
+                
+                response.questions.forEach((item, index) => {
+                    // console.log(`Question ${index + 1}: ${item.question}`);
+                    // console.log(`Answer: ${item.answer}`);
+                    // console.log(''); // Add an empty line for better readability
+                    flipCards.push({
+                        "question": item.question,
+                        "answer": item.answer
+                    })
+                });
+
+                console.log(flipCards);
+
+                createFlipCard(flipCards[0].question, flipCards[0].answer);
+                hidePrompts();
+                // displayCard(currentCardIndex);
+
+                
+                // flipCards = response.map(item => createFlipCard(item.question, item.answer));
+                // currentCardIndex = 0;
+                //// displayFlipCards();
             },
             error: function(xhr, status, error) {
                 console.error('Error:', error);
             }
         });
+
     });
 
     $('#generate1').click(function() {
@@ -88,7 +133,7 @@ $(document).ready(function() {
     });
 
     $('#next').click(function() {
-        if (currentCardIndex < cardsData.length - 1) {
+        if (currentCardIndex < flipCards.length - 1) {
             currentCardIndex++;
             alert(currentCardIndex);
             displayCard(currentCardIndex);
@@ -96,11 +141,10 @@ $(document).ready(function() {
     });
 
     function displayCard(index) {
-        const card = cardsData[index];
+        const card = flipCards[index];
         // TODO: fix buttons not working
         console.log(card.question + '\n' + card.answer);
         const flipCardHtml = `
-        <button id="prev"><</button>
         <div class="flip-card">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
@@ -113,10 +157,14 @@ $(document).ready(function() {
                 </div>
             </div>
         </div>
-        <button id="next">></button>
+        `;
+        const buttonsHtml = `
+            <button id="prev"><</button>
+            <button id="next">></button>
         `;
     
         $('#flip-cards-container').html(flipCardHtml).show();
+        $('#buttons').html(buttonsHtml).show();
     }
 
     function hidePrompts() {
