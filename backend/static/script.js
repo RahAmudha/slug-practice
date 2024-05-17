@@ -3,12 +3,31 @@ $(document).ready(function() {
     let flipCards = [];
 
     function createFlipCard(question, answer) {
-        return `
-            <div class="flip-card">
-                <div class="flip-card-front">${question}</div>
-                <div class="flip-card-back">${answer}</div>
+        console.log(question + '\n' + answer);
+        const flipCardHtml = `
+        <button id="prev"><</button>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <h2>QUESTION</h2>
+                    <p>${question}</p>
+                </div>
+                <div class="flip-card-back">
+                    <h2>ANSWER</h2>
+                    <p>${answer}</p>
+                </div>
             </div>
+        </div>
+        <button id="next">></button>
         `;
+    
+        $('#flip-cards-container').html(flipCardHtml).show();
+        // return `
+        //     <div class="flip-card">
+        //         <div class="flip-card-front">${question}</div>
+        //         <div class="flip-card-back">${answer}</div>
+        //     </div>
+        // `;
     }
 
     function displayFlipCards() {
@@ -35,21 +54,29 @@ $(document).ready(function() {
             "difficulty": difficulty,
             "format": format
         };
-
+        
         $.ajax({
             url: 'http://127.0.0.1:5000/openai/generate', 
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function(response) {
-                flipCards = response.map(item => createFlipCard(item.question, item.answer));
-                currentCardIndex = 0;
-                displayFlipCards();
+                console.log(response);
+
+                createFlipCard("test", "test answer");
+                hidePrompts();
+                // displayCard(currentCardIndex);
+
+                
+                // flipCards = response.map(item => createFlipCard(item.question, item.answer));
+                // currentCardIndex = 0;
+                //// displayFlipCards();
             },
             error: function(xhr, status, error) {
                 console.error('Error:', error);
             }
         });
+
     });
 
     $('#generate1').click(function() {

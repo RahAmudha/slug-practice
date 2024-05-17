@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #1c200a;
+    background-color: #0b0a20;
     margin: 0;
     padding: 20px
 }
@@ -13,19 +13,35 @@ h2, p {
     max-width: 600px;
     margin: auto;
     text-align: center;
+    padding-top: 5rem;
 }
 
 .input-group input {
     margin: 10px 0;
     padding: 20px;
     width: calc(50% - 22px);
-    border: 1px solid #ccc;
+    border: 1px solid #5e5b85;
     border-radius: 25px;
+    background-color: #28256d;
+
+    color: rgb(196, 196, 196);
+    font: 1em Arial;
 }
 
 .input-group button {
     padding: 10px 20px;
     cursor: pointer;
+}
+
+#generate-container {
+    padding-top: 1rem;
+}
+
+#generate, #generate1 {
+    background-color: #3f3472;
+    border: 1px solid #444261;
+    border-radius: 25px;
+    color: #fff;
 }
 
 #flip-cards-container {
@@ -38,7 +54,7 @@ h2, p {
 }
 
 .flip-card {
-    background-color: #726e34;
+    background-color: #3f3472;
     /* width: 50em; */
     height: 25em; 
     border: 1px solid #ccc;
