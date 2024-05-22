@@ -28,6 +28,18 @@ h2, p {
     font: 1em Arial;
 }
 
+.input-group select {
+    margin: 10px 0;
+    padding: 20px;
+    width: calc(52%);
+    border: 1px solid #5e5b85;
+    border-radius: 25px;
+    background-color: #28256d;
+
+    color: rgb(196, 196, 196);
+    font: 1em Arial;
+}
+
 .input-group button {
     padding: 10px 20px;
     cursor: pointer;
