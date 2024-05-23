@@ -30,6 +30,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status === 'bueno') {
                     cardsData = response.questions;
+                    hideLogo();
                     displayCard(currentCardIndex);
                     displayButtons();
                     hidePrompts();
@@ -117,6 +118,10 @@ $(document).ready(function() {
         $('#flip-cards-container').html(flipCardHtml).show();
     }
   
+    function hideLogo() {
+        $('#logo').hide();
+    }
+
     function hidePrompts() {
         $('#subject').hide();
         $('#prompt').hide();
