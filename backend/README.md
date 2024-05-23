@@ -35,9 +35,8 @@ Replace `your-openai-api-key` with your actual OpenAI API key.
 3. The server should now be running on `http://localhost:5000`.
 
 ## API Endpoints
-- `/api/generate/simple` (POST): Generates simple practice problems.
-- `/api/generate/tf` (POST): Generates true/false practice problems.
-- `/api/generate/mc` (POST): Generates multiple-choice practice problems.
+- `/api/generate` (POST): Generates practice problems based on what format 'mc/simple/tf'.
+
 ## Troubleshooting
 - If you encounter any issues, make sure you have installed all the dependencies listed in the `requirements.txt` file.
 - Ensure that your OpenAI API key is valid and correctly set in the `.env` file.
