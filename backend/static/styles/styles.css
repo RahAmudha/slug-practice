@@ -9,6 +9,12 @@ h2, p {
     color: #fff;
 }
 
+ul {
+    font-family: Arial, sans-serif;
+    color: #fff;
+    list-style-type: none;
+}
+
 .container {
     max-width: 600px;
     margin: auto;
@@ -20,6 +26,18 @@ h2, p {
     margin: 10px 0;
     padding: 20px;
     width: calc(50% - 22px);
+    border: 1px solid #5e5b85;
+    border-radius: 25px;
+    background-color: #28256d;
+
+    color: rgb(196, 196, 196);
+    font: 1em Arial;
+}
+
+.input-group select {
+    margin: 10px 0;
+    padding: 20px;
+    width: calc(52%);
     border: 1px solid #5e5b85;
     border-radius: 25px;
     background-color: #28256d;

@@ -13,11 +13,19 @@
         <div class="input-group">
             <input type="text" id="subject" placeholder="Enter Subject">
             <input type="text" id="prompt" placeholder="Enter an Example">
-            <input type="text" id="difficulty" placeholder="Enter Difficulty 1-10"><br>
-            <input type="text" id="format" placeholder="Enter the format"><br>
+            <!-- <input type="text" id="difficulty" placeholder="Enter Difficulty 1-10"><br> -->
+            <select id="difficulty">
+                <option value="1">Easy</option>
+                <option value="5">Medium</option>
+                <option value="10">Hard</option>
+            </select>
+            <select id="format">
+                <option value="simple">Question & Answer</option>
+                <option value="mc">Multiple Choice</option>
+                <option value="tf">True / False</option>
+            </select>
             <div id="generate-container">
                 <button id="generate">Generate</button>
-                <!-- <button id="generate1">Generate w/ Dummy Data</button> -->
             </div>
         </div>
         <div id="flip-cards-container"></div>
