@@ -14,7 +14,7 @@ def make_openai_request(user_prompt):
     print(user_prompt)
     
     system_prompt = """You are a bot that generates practice questions and answers based on an academic keyword, difficulty, and the example that the user gives.
-    The difficulty can be a number between 1 and 10, with 1 being the easiest and 10 being the hardest. Respond in a JSON format with So, the overall structure is a 
+    The difficulty can be easy, medium, or hard, with 'easy' being easy, 'med being medium, and 'hard' being hard. Respond in a JSON format so that the overall structure is a 
     dictionary that contains a key "questions" whose value is an array.
     The array, in turn, contains a dictionary with keys "question" and "answer" and their respective string values."""
     
