@@ -19,8 +19,9 @@ $(document).ready(function() {
             "difficulty": difficulty,
             "format": format
         };
-  
-        $("generate").html("Generating...<img src='../imgs/loading-style.webp'>").prop('disabled', true)
+
+        // Show the loading symbol
+        $('#loadingSymbol').show();
   
         $.ajax({
             url: 'http://127.0.0.1:5000/openai/generate', 
@@ -44,7 +45,8 @@ $(document).ready(function() {
             },
             complete: function() {
                 // alert('Data fetched successfully');
-                $('#generate').html('Generate').prop('disabled', false);
+                // $('#generate').html('Generate').prop('disabled', false);
+                $('#loadingSymbol').hide();
             }
   
         });
@@ -69,7 +71,52 @@ $(document).ready(function() {
         }
         displayCard(currentCardIndex);
     });
-  
+
+    // When the user clicks on the help link, open the modal
+    $('#homeLink').on('click', function() {
+        // alert("Home link clicked");
+
+        if ($('#flip-cards-container').is(':visible')) {
+            // hide the flip cards container
+            $('#flip-cards-container').hide();
+            $('#buttons').hide();
+            
+            // reset & show the logo and prompt entry fields
+            $('#logo').show();
+
+            $('#subject').show();
+            $('#subject').val('');
+
+            $('#prompt').show();
+            $('#prompt').val('');
+
+            $('#difficulty').show();
+            $('#difficulty').trigger('reset');
+
+            $('#format').show();
+            $('#format').trigger('reset');
+
+            $('#generate').show();
+        }
+    });
+
+    // When the user clicks on the help link, open the modal
+    $('#helpLink').on('click', function() {
+        $('#myModal').show();
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    $('.close').on('click', function() {
+        $('#myModal').hide();
+    });
+
+    // When the user clicks anywhere outside of the modal, close it
+    $(window).on('click', function(event) {
+        if ($(event.target).is('#myModal')) {
+        $('#myModal').hide();
+        }
+    });
+    
     function displayCard(index) {
         const card = cardsData[index];
         console.log(card.question + '\n' + card.answer);
