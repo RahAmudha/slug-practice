@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flip Card Generator</title>
+    <title>SlugPractice</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
 </head>
 <body>
@@ -11,6 +11,12 @@
         <!-- <h1>Slug Practice</h1> -->
         <!-- <img src="../imgs/slug-practice-favicon-black.png" alt="Slug Practice Logo"> -->
         <div id="logo"><img src="{{ url_for('static', filename='imgs/slug-practice-favicon-black.png') }}" /></div>
+        
+        <!-- Home Link -->
+        <a href="#" id="homeLink" class="topLinks">Home</a>&nbsp;&nbsp;
+        <!-- Help Link -->
+        <a href="#" id="helpLink" class="topLinks">Help</a>
+
         <div class="input-group">
             <input type="text" id="subject" placeholder="Enter Subject">
             <input type="text" id="prompt" placeholder="Enter an Example">
@@ -26,11 +32,28 @@
                 <option value="tf">True / False</option>
             </select>
             <div id="generate-container">
-                <button id="generate">Generate</button>
+                <button id="generate">Generate
+                    <div id="loadingSymbol">
+                        <img src="{{ url_for('static', filename='imgs/loading-style.webp') }}" alt="Loading..."
+                            width="50px" height="50px">
+                    </div>
+                </button>
+            </div>
+            <div id="loadingSymbol">
+                <img src="{{ url_for('static', filename='imgs/loading-style.webp') }}" alt="Loading...">
             </div>
         </div>
         <div id="flip-cards-container"></div>
         <div id="buttons"></div>
+
+        <!-- Modal Window -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some help text goes here...</p>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static',filename='script.js') }}"> </script>
