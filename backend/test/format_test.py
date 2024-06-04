@@ -20,10 +20,10 @@ total_tests = len(test_cases)
 def isString(value1):
     return type(value1) == type("")
 def validChoices(letters, choices):
-    if type(choices) != type({"slug": "practice"}):
+    if type(choices) != type([]) or len(choices) != len(letters):
         return False
-    for letter in letters:
-        if letter not in choices.keys() or not isString(choices[letter]):
+    for i in range(len(letters)):
+        if choices[i][0] != letters[i] or choices[i][2] != " " or len(choices[i]) <= 3:
             return False
     return True
 def keysInDict(keyList, question):
@@ -36,20 +36,24 @@ fout.write("STARTING TEST\n")
 for i, test in enumerate(test_cases):
     print(f"Running Test Case {i + 1}:")
     res = process_request(test)
+    #print(res)
     success = len(res) == 2 and \
         keysInDict(["questions", "status"], res) and \
         type(res["questions"]) == type([])
     if success:
         for question in res["questions"]:
-            #print(question)
             if test["format"] == "mc":
                 # check the json
-                choiceVar = "choice" if "choice" in question.keys() else "choices"
+                choiceVar = "null"
+                for key in ["choice", "choices", "option", "options"]:
+                    choiceVar = key if (key in question.keys() and choiceVar == "null") else choiceVar
                 success = len(question) == 3 and keysInDict(["question", choiceVar, "answer"], question)  # check if every key is in the dict
                 # check the question
                 success = success and questionTest(question["question"])
-                # check the choices, this part fails if question[choiceVar] is a list
+                # check the choices, this part fails if question[choiceVar] is a dict
                 success = success and validChoices("ABC", question[choiceVar])
+                if (success == False):
+                    print(f"it probably found a dictionary at test case {i + 1}")
                 # check the answer
                 success = success and isString(question["answer"]) and len(question["answer"]) == 1 and question["answer"] in "ABC"
                 # check the test result
