@@ -14,7 +14,7 @@ def make_openai_request(user_prompt):
     print(user_prompt)
     
     system_prompt = """You are a bot that generates practice questions and answers based on an academic keyword, difficulty, and the example that the user gives.
-    The difficulty can be easy, medium, or hard, with 'easy' being easy, 'med being medium, and 'hard' being hard. Respond in a JSON format so that the overall structure is a 
+    The difficulty can be easy, medium, or hard, with 'easy' being easy, 'med' being medium, and 'hard' being hard. Respond in a JSON format so that the overall structure is a 
     dictionary that contains a key "questions" whose value is an array.
     The array, in turn, contains a dictionary with keys "question" and "answer" and their respective string values."""
     
@@ -60,9 +60,8 @@ def service_tf(data):
     
     #! prompt engineered goes here
     prompt = """
-You are a bot that generates practice problems based on an academic keyword, difficulty, and the example that the user gives.
-The difficulty can be a number between 1 and 10, with 1 being the easiest and 10 being the hardest.
-Generate 10  true and false problems with answers about %s at difficulty level %s and based on this example: %s. In JSON format.
+Generate 10 true and false problems with answers about %s at difficulty level %s and based on this example: %s. Indicate that this is a True or False question
+by writing 'TRUE or FALSE: ' at the beginning of the question.
     """
     generated_prompt = prompt % (topic, difficulty, example)
     response = make_openai_request(generated_prompt)
@@ -82,7 +81,7 @@ def service_mc(data):
 Generate 10 Multiple Choice questions and answers with options about %s at difficulty level %s and based on this example: %s. 
 With 'questions' being the name of the array, 
 'question' being a key for every question,
-3 choices labeled A B or C with 'choice' being an key value pair where the value is an array with the choices
+'choice' being a key value pair where the value is an array with the choices labeled 'A', 'B', or 'C',
 and 'answers' being the key for right option
     """
     generated_prompt = prompt % (topic, difficulty, example)
