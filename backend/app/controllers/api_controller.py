@@ -8,6 +8,7 @@ def process_request(payload_data):
     
     errorType = {'1' : "Invalid academic topic", '2': "Invalid example question", '3' : "Topic and Question not related" }
 
+    # user validation step
     response_obj = {}
     valid_code = isValid(payload_data)
     if  valid_code != '4':
