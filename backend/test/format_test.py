@@ -65,7 +65,7 @@ for i, test in enumerate(test_cases):
                 success = success and questionTest(question["question"])
                 # check the answer:
                 if test["format"] == "tf":
-                    success = success and isString(question["answer"]) and question["answer"] in ["True", "False"] 
+                    success = success and isString(question["answer"]) and question["answer"] in ["true", "false"] 
                 elif test["format"] == "simple":
                     success = success and isString(question["answer"]) 
                 else:

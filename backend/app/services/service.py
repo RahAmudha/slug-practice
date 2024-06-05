@@ -4,10 +4,11 @@ Service the api request i.e parse...
 from flask import jsonify
 from openai import OpenAI
 import os
+from dotenv import load_dotenv
 
 
 def make_openai_request(user_prompt):
-
+    load_dotenv()
     APIKEY = os.environ.get("OPENAI_SLUG_PRACTICE_API_KEY")    
     client = OpenAI(api_key= APIKEY)
     
