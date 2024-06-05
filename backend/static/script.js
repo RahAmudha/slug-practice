@@ -22,6 +22,9 @@ $(document).ready(function() {
 
         // Show the loading symbol
         $('#loadingSymbol').show();
+
+        var $button = $(this); // Cache the button element
+        $button.prop('disabled', true); // Disable the button
   
         $.ajax({
             url: 'http://127.0.0.1:5000/openai/generate', 
@@ -47,6 +50,7 @@ $(document).ready(function() {
                 // alert('Data fetched successfully');
                 // $('#generate').html('Generate').prop('disabled', false);
                 $('#loadingSymbol').hide();
+                $button.prop('disabled', false);
             }
   
         });
@@ -99,6 +103,11 @@ $(document).ready(function() {
             $('#generate').show();
         }
     });
+
+    $('#generate').on('click', function() { 
+        var $button = $(this); // Cache the button element
+        $button.prop('disabled', true); // Disable the button
+    }); 
 
     // When the user clicks on the help link, open the modal
     $('#helpLink').on('click', function() {
