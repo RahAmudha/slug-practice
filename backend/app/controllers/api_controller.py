@@ -1,39 +1,24 @@
 
+from app.controllers.user_val import isValid
 from app.services.service import*
 import json
 
 
 def process_request(payload_data):
     
-    #TODO User Validation Goes Here
-    #** Here **#
-    
-    """
-    Wrong User input
-    
-        ***If bad input***
-    
-    if isValid(payload_data) is false <---- isValid checks the user input and returns a status_code
-        then return (status_code) 
-        
-    if status_code is BAD!!
-        then return json with the error code and payload_data
-        like this
-        { 
-            data : payload_data <---- the user input
-            status: 'muy mal example or 'muy mal topic or muy mal both' TODO find a better code system!
-            
-        }
-    
-    otherwise:
-        continue 
+    errorType = {'1' : "Invalid academic topic", '2': "Invalid example question", '3' : "Topic and Question not related" }
 
-    """
-    
-    
-    #bad_example = {'topic' : "drugs", 'example' : "How did Light Yagami die?",'difficulty': 5, "format": "mc"}
-    
-    
+    # user validation step
+    response_obj = {}
+    valid_code = isValid(payload_data)
+    if  valid_code != '4':
+        response_obj['status'] = "400"
+        response_obj['message'] = "invalid request"
+        response_obj['error_type'] = errorType[valid_code]
+        json.dumps(response_obj)
+        return response_obj
+
+        
     
     format_type = payload_data['format']
     
@@ -48,6 +33,7 @@ def process_request(payload_data):
     
     response_str = response  # Assuming response is a JSON string
     response_obj = json.loads(response_str)
-    response_obj['status'] = "bueno"
+    response_obj['status'] = "200"
+    response_obj['message'] = "success"
 
     return response_obj
