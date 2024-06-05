@@ -61,7 +61,7 @@ def service_tf(data):
     #! prompt engineered goes here
     prompt = """
 Generate 10 true and false problems with answers about %s at difficulty level %s and based on this example: %s. Indicate that this is a True or False question
-by writing 'TRUE or FALSE: ' at the beginning of the question.
+by writing 'TRUE or FALSE: ' at the beginning of the question. The answers should be either 'true' or 'false' in lower case.
     """
     generated_prompt = prompt % (topic, difficulty, example)
     response = make_openai_request(generated_prompt)
@@ -81,8 +81,7 @@ def service_mc(data):
 Generate 10 Multiple Choice questions and answers with options about %s at difficulty level %s and based on this example: %s. 
 With 'questions' being the name of the array, 
 'question' being a key for every question,
-'choice' being a key value pair where the value is an array with the choices labeled 'A', 'B', or 'C',
-and 'answers' being the key for right option
+'choices' being an array of strings that start with the letter choices, 'A', 'B', or 'C' and end with their respective answers.
     """
     generated_prompt = prompt % (topic, difficulty, example)
     response = make_openai_request(generated_prompt)
