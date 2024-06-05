@@ -1,11 +1,11 @@
 from openai import OpenAI
 import os
-
+from dotenv import load_dotenv
 
 
 
 def isValid(user_data):
-
+    load_dotenv()
     APIKEY = os.environ.get("OPENAI_SLUG_PRACTICE_API_KEY")
 
     client = OpenAI(api_key= APIKEY)
