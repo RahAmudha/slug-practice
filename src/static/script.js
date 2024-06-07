@@ -32,7 +32,7 @@ $(document).ready(function() {
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function(response) {
-                if (response.status === 'bueno') {
+                if (response.status === '200') {
                     cardsData = response.questions;
                     hideLogo();
                     displayCard(currentCardIndex);
